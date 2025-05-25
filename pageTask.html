@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>node-db-example</title>
+
+	</head>
+	<body>
+		<h1>fred</h1>
+
+		<table>
+			<caption>Tasks</caption>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Due Date</th>
+					<th>Category</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="task-rows"></tbody>
+			<!--This tbody contains a template element that we will clone when we add rows to the table-->
+			<tbody id="task-row-template-container" style="display: none;">
+				<tr>
+					<td class="id"></td>
+					<td class="name">
+						<span class="color-indicator" style="display: inline-block; width: 16px; height: 16px; vertical-align: middle;"></span>
+						<span class="text"></span>
+					</td>
+					<td class="description"></td>
+					<td class="due-date"></td>
+					<td class="category"></td>
+					<td>
+						<button class="delete-button">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+
+
+		<button id="btAdd">Add Task</button>
+		<button id="btUser">User</button>
+		<form id="frmNew" style="display: none;">
+			<fieldset>
+				<legend>Add New Task</legend>
+				<label>Name</label><br />
+				<input type="text" name="name" /><br />
+				<label>Description</label><br />
+				<input type="text" name="description" /><br />
+				<label>Due Date</label><br />
+				<input type="date" name="due-date" /><br />
+				<label>Category</label><br />
+				<select name="category-id"></select><br />
+				<button id="clear-task-form-button">Cancel</button>
+				<button id="btSaveAdd">Submit</button>
+			</fieldset>
+		</form>
+
+<script type="text/javascript">
+window.alert("deb script");
+
+// add event listener to the add task button
+document
+	.getElementById('btAdd')
+	.addEventListener('click',  () => {
+		// show the new task form
+		window.alert("btAdd1");
+		const newTaskForm = document.getElementById('frmNew');
+		newTaskForm.style.display = 'block';
+	})
+
+
+
+	
+
+document
+	.getElementById('btUser')
+	.addEventListener('click', e => {
+		// prevent the browser from submitting the form
+		window.alert("btUser1");
+		e.preventDefault();
+		window.alert("btUser2");
+
+		let user = {
+		name: 'Johncccc',
+		surname: 'Smithccccc'
+		};
+
+		// send the form values to the server
+		fetch('/user', { 
+			body: JSON.stringify(user),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			// use the post method since this operation changes data on the server
+			method: 'POST'
+	})
+		.then(() => {
+			// clear the form
+			clearNewTaskForm();
+			// refresh the table to show the new task
+			populateTaskTable();
+		});
+
+		window.alert("btUser3");
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+// fetch the tasks from the server and add a row to the table for each one
+function populateTaskTable() {
+	window.alert("populateTaskTable 1");
+	// fetch the tasks
+	fetch('/user')
+		// convert the response to a json object
+		.then(response => response.json())
+		// process the json object
+		.then(user => {
+			// check if there are any tasks
+		}
+	)
+
+	window.alert("populateTaskTable 2");
+
+	// create a placeholder row to indicate that no tasks have been found
+	const placeholderTaskCell = document.createElement('td');
+	placeholderTaskCell.textContent = 'No tasks found.';
+	placeholderTaskCell.colSpan = taskRowTemplate.children.length;
+	taskRows.appendChild(
+		document
+			.createElement('tr')
+			.appendChild(placeholderTaskCell)
+	);
+
+	window.alert("populateTaskTable fin");
+	
+}
+
+function clearNewTaskForm() {
+window.alert("clearNewTaskForm");
+}
+
+
+// add event listener to the new task from submit button
+document
+	.getElementById('btSaveAdd')
+	.addEventListener('click', e => {
+		// prevent the browser from submitting the form
+		window.alert("btSaveAdd1");
+		e.preventDefault();
+		window.alert("btSaveAdd2");
+		let coucou = {
+		name: 'Johncccc',
+		surname: 'Smithccccc'
+		};
+		// send the form values to the server
+		fetch('/tasks/add', { 
+
+			body: JSON.stringify(coucou),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			// use the post method since this operation changes data on the server
+			method: 'POST'
+	})
+		.then(() => {
+			// clear the form
+			clearNewTaskForm();
+			// refresh the table to show the new task
+			populateTaskTable();
+		});
+
+		window.alert("btSaveAdd4");
+	});
+
+
+	populateTaskTable() ;
+	window.alert("fin script");
+
+</script>
+
+
+
+
+
+<form action="/tasks/mam" method="POST">
+  <div>
+    <label for="say">Quelle salutation voulez-vous dire ?</label>
+    <input name="say" id="say" value="Salut" />
+  </div>
+  <div>
+    <label for="to">A qui voulez-vous le dire ?</label>
+    <input name="to" id="to" value="Maman" />
+  </div>
+  <div>
+    <button>Envoyer mes salutations</button>
+  </div>
+</form>
+
+
+
+
+
+
+
+	</body>
+</html>

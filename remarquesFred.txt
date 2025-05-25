@@ -1,0 +1,12 @@
+"npm init"
+-> package.json
+"npm i express"
+creer "index.js"
+"node "index.js"
+-> "le serveur est lancé"
+-> "localhost:8080"
+
+pour pageEjs
+"npm i ejs"
+  ou "npm i ejs --save" ?
+
