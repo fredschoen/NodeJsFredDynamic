@@ -6,6 +6,13 @@
 	</head>
 	<body>
 		<h1>fred</h1>
+<h2>coucou</h2>
+			<table>
+			<tr id="trInsert">
+			<td>__</td><td>__</td>
+			</tr>
+			</table>
+<h2>coucou</h2>
 
 		<table>
 			<caption>Tasks</caption>
@@ -147,6 +154,12 @@ document
 // fetch the tasks from the server and add a row to the table for each one
 function populateTaskTable() {
 	window.alert("populateTaskTable 1");
+
+	var trInsert = document.getElementById("trInsert");
+	var new_row = trInsert.parentNode.insertRow( trInsert.rowIndex + 1 );
+	new_row.insertCell(0).innerHTML = nameTextBox.value;
+	new_row.insertCell(1).innerHTML = descriptionTextBox.value ;
+
 	// fetch the tasks
 	fetch('/user')
 		// convert the response to a json object
@@ -159,10 +172,13 @@ function populateTaskTable() {
 
 	window.alert("populateTaskTable 2");
 
+
+	
 	// create a placeholder row to indicate that no tasks have been found
 	const placeholderTaskCell = document.createElement('td');
 	placeholderTaskCell.textContent = 'No tasks found.';
 	placeholderTaskCell.colSpan = taskRowTemplate.children.length;
+	window.alert("populateTaskTable 3");
 	taskRows.appendChild(
 		document
 			.createElement('tr')
@@ -175,6 +191,11 @@ function populateTaskTable() {
 
 function clearNewTaskForm() {
 window.alert("clearNewTaskForm");
+	// clear the values from the text boxes
+	nameTextBox.value = '';
+	descriptionTextBox.value = '';
+	dueDatePicker.value = '';
+
 }
 
 
@@ -201,10 +222,10 @@ document
 			method: 'POST'
 	})
 		.then(() => {
-			// clear the form
-			clearNewTaskForm();
 			// refresh the table to show the new task
 			populateTaskTable();
+			// clear the form
+			clearNewTaskForm();
 		});
 
 		window.alert("btSaveAdd4");
