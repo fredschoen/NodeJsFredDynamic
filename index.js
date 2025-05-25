@@ -53,7 +53,6 @@ console.log("task/add");
 app.post('/user', (req, res) => {
 console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 console.log("user");
-console.log(req.body.name);
 
 		let user = {
 		name: 'Uuuucccc',

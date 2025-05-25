@@ -19,9 +19,9 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody id="task-rows"></tbody>
+			<tbody id="taskRow"></tbody>
 			<!--This tbody contains a template element that we will clone when we add rows to the table-->
-			<tbody id="task-row-template-container" style="display: none;">
+			<tbody id="taskRowTemplateContainer" style="display: none;">
 				<tr>
 					<td class="id"></td>
 					<td class="name">
@@ -42,9 +42,9 @@
 
 
 
-		<button id="btAdd">Add Task</button>
+		<button id="btAddShow">Add Task</button>
 		<button id="btUser">User</button>
-		<form id="frmNew" style="display: none;">
+		<form id="frmNewTask" style="display: none;">
 			<fieldset>
 				<legend>Add New Task</legend>
 				<label>Name</label><br />
@@ -55,7 +55,7 @@
 				<input type="date" name="due-date" /><br />
 				<label>Category</label><br />
 				<select name="category-id"></select><br />
-				<button id="clear-task-form-button">Cancel</button>
+				<button id="btClearFrm">Cancel</button>
 				<button id="btSaveAdd">Submit</button>
 			</fieldset>
 		</form>
@@ -63,13 +63,28 @@
 <script type="text/javascript">
 window.alert("deb script");
 
+const
+	// task table elements
+	taskRows = document.getElementById('taskRow'),
+	taskRowTemplate = document.getElementById('taskRowTemplateContainer').children[0],
+	// new task form elements
+	newTaskForm = document.getElementById('frmNewTask'),
+	nameTextBox = newTaskForm.querySelector('input[name="name"]'),
+	descriptionTextBox = newTaskForm.querySelector('input[name="description"]'),
+	dueDatePicker = newTaskForm.querySelector('input[name="due-date"]'),
+	categoryIdSelectList = newTaskForm.querySelector('select[name="category-id"]');
+
+
+
+
+
 // add event listener to the add task button
 document
-	.getElementById('btAdd')
+	.getElementById('btAddShow')
 	.addEventListener('click',  () => {
 		// show the new task form
-		window.alert("btAdd1");
-		const newTaskForm = document.getElementById('frmNew');
+		window.alert("btAddShow1");
+		const newTaskForm = document.getElementById('frmNewTask');
 		newTaskForm.style.display = 'block';
 	})
 
@@ -111,6 +126,15 @@ document
 
 
 
+// add event listener to the new task form cancel button
+document
+	.getElementById('btClearFrm')
+	.addEventListener('click', e => {
+		// prevent the browser from submitting the form
+		e.preventDefault();
+		// clear the form
+		clearNewTaskForm();
+	});
 
 
 
