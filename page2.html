@@ -3,31 +3,22 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-<script language='javascript'>
+    <script language='javascript'>
+        function funct1(arg1)
+            {       
+            window.alert(arg1);
+            return false;
+            }
 
-function SubForm(valeur,arg1)
-	{       
-//	if (arg1 == "")	{
-//				  document.formulairePg.action=valeur;
-//				  document.formulairePg.submit();
-//	}	else	{
-//				  document.formulairePg.action=valeur;
-//				  document.formulairePg.cod.value = arg1;
-//				  document.formulairePg.submit();
-//	}
-//window.alert(), window.confirm(), window.prompt().
-    window.alert(arg1);
-	return false;
-	}
-
-</script>
-
+    </script>
 
     </head>
     <body>
         <h1>coucou page 2 </h1>
         <a href="/">page0</a>
-<a onclick="SubForm('coucou','coucou')"; return false; href="#">coucou</a>
+        <a onclick="funct1('coucou')"; return false; href="#">coucou</a>
 
+        <h2 ID="h2coucou">coucou</h2>
+        <button onclick="funct1('button1')">Click me</button> 
     </body>
 </html>
